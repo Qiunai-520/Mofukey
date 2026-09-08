@@ -30,21 +30,27 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  */
 export const commentConfig: CommentConfig = withUserConfig("comment", {
 	/** 全局评论总开关：false 时完全不加载评论脚本与 DOM */
-	enable: false,
+<<<<<<< HEAD
+	enable: true,
 	/** 评论提供商类型："none" | "twikoo" | "giscus" */
-	provider: "none",
+	provider: "twikoo",
+=======
+	enable: true,
+	/** 评论提供商类型："none" | "twikoo" */
+	provider: "twikoo",
+>>>>>>> 0706b64 (个性化站点：删除示例内容，更新配置，添加自己的文章和图片)
 	/** 是否开启视口懒加载：滚动进入视口才动态加载评论组件（推荐 true） */
 	lazy: true,
 	/** Twikoo 专有配置 */
 	twikoo: {
 		/** Twikoo 环境 ID（如 "https://your-twikoo.vercel.app" 或腾讯云环境 ID） */
-		envId: "",
+		envId: "https://comment.mofukey.top/",
 		/** Twikoo 前端 JS 脚本 CDN 地址 */
 		scriptUrl: "https://cdn.jsdelivr.net/npm/twikoo@1.7.20/dist/twikoo.min.js",
 		/** 评论语言："auto"（跟随站点）| "zh-CN" | "zh-TW" | "en" | "ja" 等 */
 		lang: "auto",
 		/** 评论输入框占位提示文本 */
-		placeholder: "Share your thoughts...",
+		placeholder: "分享你的想法……",
 	},
 	/** Giscus 专有配置（基于 GitHub Discussions，评论数据存储在公开仓库中） */
 	giscus: {
