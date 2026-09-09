@@ -7,9 +7,14 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  */
 export const profileConfig: ProfileConfig = withUserConfig("profile", {
 	avatar: "assets/images/avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "Qiunai",
+	name: "Qiunai", 
 	bio: "用最初的心 走最远的路.",
 	links: [
+		{
+			name: "RSS",
+			icon: "fa6-solid:rss",
+			url: "/rss.xml",
+		},
 		{
 			name: "X",
 			icon: "fa6-brands:x-twitter", // Visit https://icones.js.org/ for icon codes
@@ -26,6 +31,11 @@ export const profileConfig: ProfileConfig = withUserConfig("profile", {
 			name: "GitHub",
 			icon: "fa6-brands:github",
 			url: "https://github.com/Qiunai-520",
+		},
+		{
+			name: "Bilibili",
+			icon: "fa6-brands:bilibili",
+			url: "https://b23.tv/9GLTpv9",
 		},
 	],
 });

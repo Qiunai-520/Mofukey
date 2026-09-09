@@ -19,7 +19,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 1,
 		title: "Mofukey",
-		imgurl: "https://blog.mofukey.top/ResourceFolder/mofukey.webp",
+		imgurl: "/assets/images/mofukey2.png",
 		desc: "用心创造美好世界.",
 		siteurl: "https://blog.mofukey.com",
 		tags: ["Blog"],
