@@ -23,7 +23,7 @@ description: Working on the Shirone sidebar system, widgets, FAB floating contro
 - `docs/sidebar-widgets.md` — 内置 widget 逐个文档与配置形状
 - `docs/fab-system.md` — FAB 与移动端悬浮目录架构、设备矩阵
 - `docs/common-components.md` — 新增可复用组件/侧栏 widget 流程(§3.1 checklist)
-- `src/pages/AGENTS.md` — 页面层规则(thin route、SidebarPage、持久壳测试)
+- `src/pages/_AGENTS.md` — 页面层规则(thin route、SidebarPage、持久壳测试)
 - `src/config/sidebarConfig.ts` — 侧栏编排配置
 - `src/types/sidebarConfig.ts` — `SidebarPage` / `SidebarWidget` 权威类型
 
