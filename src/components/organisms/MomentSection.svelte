@@ -23,7 +23,14 @@ import { onMount } from "svelte";
 let {
 	moments = [] as MomentItem[],
 	author = { name: "", avatar: "", url: "/about/" } as MomentAuthor,
-}: { moments?: MomentItem[]; author?: MomentAuthor } = $props();
+	title = i18n(I18nKey.moments),
+	subtitle = i18n(I18nKey.momentsBanner),
+}: {
+	moments?: MomentItem[];
+	author?: MomentAuthor;
+	title?: string;
+	subtitle?: string;
+} = $props();
 
 const MOMENTS_PAGE_SIZE = 10;
 
@@ -122,8 +129,8 @@ onMount(() => {
 <Card color="var(--card-bg)" radius="l" class="moment-section px-8 py-6">
 	<PageHeader
 		icon="material-symbols:auto-awesome-outline-rounded"
-		title={i18n(I18nKey.moments)}
-		subtitle={i18n(I18nKey.momentsBanner)}
+		{title}
+		{subtitle}
 	/>
 
 	{#if moments.length > 0}

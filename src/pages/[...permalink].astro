@@ -184,13 +184,13 @@ const jsonLd = {
 			<!-- word count and reading time -->
 			<div class="flex flex-row text-[var(--on-surface-variant)] gap-5 mb-3 transition onload-animation">
 				<div class="flex flex-row items-center">
-					<div class="transition h-6 w-6 rounded-md bg-[var(--surface-container-high)] text-[var(--on-surface-variant)] flex items-center justify-center mr-2">
+					<div class="transition h-6 w-6 rounded-[var(--shape-corner-xs)] bg-[var(--surface-container-high)] text-[var(--on-surface-variant)] flex items-center justify-center mr-2">
 						<Icon name="material-symbols:notes-rounded"></Icon>
 					</div>
 					<div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(remarkPluginFrontmatter.words === 1 ? I18nKey.wordCount : I18nKey.wordsCount)}</div>
 				</div>
 				<div class="flex flex-row items-center">
-					<div class="transition h-6 w-6 rounded-md bg-[var(--surface-container-high)] text-[var(--on-surface-variant)] flex items-center justify-center mr-2">
+					<div class="transition h-6 w-6 rounded-[var(--shape-corner-xs)] bg-[var(--surface-container-high)] text-[var(--on-surface-variant)] flex items-center justify-center mr-2">
 						<Icon name="material-symbols:schedule-outline-rounded"></Icon>
 					</div>
 					<div class="text-sm">{remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}</div>
@@ -243,7 +243,7 @@ const jsonLd = {
 						category={entry.data.category}
 					></PostMetadata>
 				)}
-				{!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
+				{!entry.data.image && <div class="border-[var(--outline-variant)] border-dashed border-b-[1px] mb-5"></div>}
 			</div>
 
             <!-- always show cover as long as it has one -->
@@ -329,10 +329,10 @@ const jsonLd = {
                 href={entry.data.nextUrl || getPostUrlBySlug(entry.data.nextSlug)}
                 color="var(--card-bg)"
                 radius="l"
-                class="post-nav post-nav--prev w-full font-bold active:scale-95 h-[3.75rem] max-w-full px-4 !flex items-center !justify-start gap-4"
+                class="post-nav post-nav--prev w-full font-bold h-[3.75rem] max-w-full px-4 !flex items-center !justify-start gap-4"
             >
                 <Icon name="material-symbols:chevron-left-rounded" class="post-nav__arrow text-[2rem] text-[var(--primary)]" />
-                <div class="post-nav__title overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-75">
+                <div class="post-nav__title overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)]">
                     {entry.data.nextTitle}
                 </div>
             </Card>
@@ -345,9 +345,9 @@ const jsonLd = {
                 href={entry.data.prevUrl || getPostUrlBySlug(entry.data.prevSlug)}
                 color="var(--card-bg)"
                 radius="l"
-                class="post-nav post-nav--next w-full font-bold active:scale-95 h-[3.75rem] max-w-full px-4 !flex items-center !justify-end gap-4"
+                class="post-nav post-nav--next w-full font-bold h-[3.75rem] max-w-full px-4 !flex items-center !justify-end gap-4"
             >
-                <div class="post-nav__title overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-75">
+                <div class="post-nav__title overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)]">
                     {entry.data.prevTitle}
                 </div>
                 <Icon name="material-symbols:chevron-right-rounded" class="post-nav__arrow text-[2rem] text-[var(--primary)]" />
@@ -367,6 +367,9 @@ const jsonLd = {
 			transition: transform var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate)
 
 		.post-nav__title
+			font: var(--m3e-type-title-medium)
+			font-weight: 600
+			color: var(--on-surface-variant)
 			transition: color var(--m3e-duration-short) var(--m3e-easing-standard)
 
 		&:hover .post-nav__title

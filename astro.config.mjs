@@ -21,6 +21,7 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { getLocalFontVariants } from "./src/utils/font-options.ts";
 import { siteMarkdownProcessor } from "./src/utils/markdown-processor.mjs";
+import { isSitemapPageAllowed } from "./src/config/sitemapFilter.ts";
 
 const musicWidgetEnabled =
 	sidebarConfig.enable &&
@@ -242,7 +243,9 @@ export default defineConfig({
 				warningFilter: () => !isDevCommand,
 			},
 		}),
-		sitemap(),
+		sitemap({
+			filter: (page) => isSitemapPageAllowed(page),
+		}),
 		mdx({
 			syntaxHighlight: false,
 			optimize: true,

@@ -99,10 +99,11 @@ pnpm content:export --yes --config  # 只回写配置
 3. **防止主题资源污染内容仓**：严格限定导出范围，仅处理属于用户内容的顶层目录。主题自带的系统资源（如网站图标 `public/favicon/`、主题字体 `src/assets/fonts/`）以及构建生成的搜索索引（`public/pagefind/`）绝不会被倒进内容仓。
 4. **永不导出的系统生成物**（内容仓若包含这些文件会导致同步报错）：
    - 说说缩略图：`public/assets/moments/thumbnails/**`
-   - 番剧封面与快照：`public/assets/anime/covers/**`、`src/data/anime-snapshots/**`
+   - 番剧封面：`public/assets/anime/covers/**`
    - 子集字体生成物：`src/assets/fonts/.subset/**`
-   - 目录占位文件 `.gitkeep` 以及清单中通过 `keep` 声明为代码仓自有的文件
-5. **跨平台换行符处理**：在 Windows 环境下比对文本前会自动消除换行符差异，并在写回内容仓时统一规范为 LF 换行，避免产生纯换行符的虚假 Git 改动。
+   - 清单中通过 `keep` 声明为代码仓自有的文件
+5. **番剧快照与 `.gitkeep` 永不导出（但同步方向允许提供）**：`src/data/anime-snapshots/**` 与各目录 `.gitkeep` 不属于「同步报错」的生成物。快照的语义是「基线（last-known-good）」：内容仓可以提供快照文件（含不调用任何外部 API 的纯静态 JSON 数据源 `source.file`），`anime:sync` 成功抓取后覆盖 `<provider>.json`（自定义 `source.file` 永不被写入）；导出侧对二者一律跳过，避免把基线与代码仓自有占位文件倒灌进内容仓。
+6. **跨平台换行符处理**：在 Windows 环境下比对文本前会自动消除换行符差异，并在写回内容仓时统一规范为 LF 换行，避免产生纯换行符的虚假 Git 改动。
 
 ### YAML 配置差分与写回规则
 
@@ -198,6 +199,9 @@ pnpm content:clean --yes    # 实际执行
 ### 缓存清理与衍生资源重算
 
 清理完成后，系统会自动清空 Astro 的本地内容缓存与锁文件，并自动重新生成离线图标集合与说说缩略图，确保代码仓彻底恢复为一个崭新、纯净的主题初始 Demo 状态。
+
+> **提示：清空集合与内容层缓存失效**  
+> 如果在外部内容仓库中清空了某个内容集合（例如删除了全部动态或文章），`pnpm content:sync` 会在检测到裁剪或空集合时主动失效 Astro 内容层存储（`node_modules/.astro/data-store.json` 与 `.astro/data-store.json`），防止旧条目残留。如果本地开发遇到类似现象，亦可随时执行 `pnpm content:clean` 或手动删除上述文件后重新构建。
 
 ### 备份快照与一键还原
 

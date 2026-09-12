@@ -49,8 +49,6 @@ export const sidebarConfig: SidebarConfig = withUserConfig("sidebar", {
 				"albums",
 				"about",
 				"post",
-				"categories",
-				"tags",
 			],
 		},
 		{
@@ -72,8 +70,6 @@ export const sidebarConfig: SidebarConfig = withUserConfig("sidebar", {
 				"albums",
 				"about",
 				"post",
-				"categories",
-				"tags",
 			],
 		},
 		{
