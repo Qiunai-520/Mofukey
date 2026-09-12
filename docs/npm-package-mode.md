@@ -113,7 +113,13 @@ pnpm's strict layout, so the source repository never sees them:
 - **Bare imports inside the package** — Vite resolves them from the *project*
   root and fails (`@astrojs/svelte/server.js`, all the `@swup/astro/*` entries).
   `src/integration/fallback-resolver.ts` retries the failed ones with the
-  package itself as importer.
+  package itself as importer. In `astro dev` the retry has to see through
+  truthy stand-ins first: Vite's builtin dev resolver answers an unresolvable
+  bare specifier from a virtual importer (like `astro:scripts/page.js`) with a
+  root-relative pseudo path instead of `null`, so the plugin verifies a
+  resolution is genuine (the file exists; no `vite:alias.noResolved` sentinel)
+  before standing down.
+
 - **Node-level `require.resolve`** — astro-icon loads icon sets outside Vite, so
   `@iconify-json/*` must really exist in the user's project. They are peer
   dependencies and `init` installs them. Same story for `sharp`, which Astro's
