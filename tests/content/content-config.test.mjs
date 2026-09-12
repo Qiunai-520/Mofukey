@@ -439,4 +439,42 @@ describe("类型校验（真实 tsc，跑在本仓库上）", () => {
 			/config\/llms\.yaml's descriptionMaxLength/,
 		);
 	});
+
+	it("comment.yaml 的合法 giscus 覆盖通过校验（含嵌套 theme 局部覆盖）", () => {
+		const result = validate({
+			"comment.yaml": [
+				"enable: true",
+				"provider: giscus",
+				"giscus:",
+				"  repo: owner/repo",
+				"  repoId: R_placeholder",
+				"  categoryId: DIC_placeholder",
+				"  theme:",
+				"    dark: transparent_dark",
+				"",
+			].join("\n"),
+		});
+		assert.deepEqual(result.files, ["config/comment.yaml"]);
+	});
+
+	it("comment.yaml 拼错的键给出 Did you mean 提示", () => {
+		expectFailure(
+			() => validate({ "comment.yaml": "giscus:\n  repoo: owner/repo\n" }),
+			/config\/comment\.yaml's giscus\.repoo.*Did you mean to write 'repo'/s,
+		);
+	});
+
+	it("comment.yaml 越界的 provider 与 mapping 枚举会被拦下", () => {
+		expectFailure(
+			() => validate({ "comment.yaml": "provider: gisko\n" }),
+			/config\/comment\.yaml's provider/,
+		);
+		expectFailure(
+			() =>
+				validate({
+					"comment.yaml": "provider: giscus\ngiscus:\n  mapping: urlpath\n",
+				}),
+			/config\/comment\.yaml's giscus\.mapping/,
+		);
+	});
 });

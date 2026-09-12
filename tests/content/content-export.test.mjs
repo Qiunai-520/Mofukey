@@ -145,7 +145,23 @@ const CONFIG_DEFAULTS = {
 	},
 	comment: {
 		enable: false,
+		provider: "none",
 		twikoo: { envId: "", scriptUrl: "https://cdn.example.com/twikoo.js" },
+		// giscus 形状与主题真实默认值同构：嵌套 theme 明暗双值 + 空字符串占位的必填字段。
+		giscus: {
+			repo: "",
+			repoId: "",
+			category: "Announcements",
+			categoryId: "",
+			mapping: "pathname",
+			strict: false,
+			reactionsEnabled: true,
+			emitMetadata: false,
+			inputPosition: "bottom",
+			theme: { light: "light", dark: "dark" },
+			lang: "auto",
+			scriptUrl: "https://giscus.app/client.js",
+		},
 	},
 };
 
@@ -833,6 +849,41 @@ export const userConfigSources = [];
 		// 数组整体替换。
 		assert.match(read(content, "config/llms.yaml"), /- 日记/);
 		assert.doesNotMatch(read(content, "config/llms.yaml"), /secret/);
+	});
+
+	it("giscus 嵌套对象的局部覆盖只导出差异键", () => {
+		const { code, content } = createFixture();
+		write(
+			code,
+			"src/user/user-config.ts",
+			`export const userConfigOverrides = {
+	comment: {
+		enable: true,
+		provider: "giscus",
+		giscus: {
+			repo: "owner/repo",
+			repoId: "R_placeholder",
+			categoryId: "DIC_placeholder",
+			theme: { dark: "transparent_dark" },
+		},
+	},
+};
+export const userConfigSources = [];
+`,
+		);
+
+		exportRun(code, ["--yes", "--config", "--force"]);
+
+		const comment = read(content, "config/comment.yaml");
+		assert.match(comment, /enable: true/);
+		assert.match(comment, /provider: giscus/);
+		assert.match(comment, /repo: owner\/repo/);
+		assert.match(comment, /dark: transparent_dark/);
+		// theme.light 未覆盖，保持主题默认值，不该出现在最小覆盖集里。
+		assert.doesNotMatch(comment, /light:/);
+		// 与默认值相同的键（mapping、scriptUrl 等）不导出。
+		assert.doesNotMatch(comment, /mapping:/);
+		assert.doesNotMatch(comment, /scriptUrl:/);
 	});
 
 	it("新建的 YAML 带说明抬头；已有文件保留注释与格式", () => {

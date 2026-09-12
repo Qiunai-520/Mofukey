@@ -23,7 +23,7 @@ description: Configure Shirone content separation and external content repositor
 3. 只在内容仓维护可物化的用户内容：`content/`、`data/`、`assets/`、`public/` 与 `config/`。挂载映射必须保持在仓库内，不能使用 `..`，不能覆盖 `scripts/`、`tests/`、`.git/` 或主题自有生成物。
 4. 将站点行为写入内容仓 `config/*.yaml`，只写需要覆盖的键。对象递归合并，数组整体替换；`nav-bar.yaml` 使用其声明式解析路径，不能按普通深合并推断。
 5. 不编辑 `src/user/user-config.ts`。它是同步生成物；需要保留代码仓中已有的有效配置时，使用 `content:export --config` 生成内容仓 YAML。
-6. 为可选外部功能保留安全默认值。关闭或配置不完整时必须没有请求、DOM 或客户端负担；凭据只放到 CI/托管平台 Secrets。Umami 的 `websiteId` 与 `scriptUrl` 是可选成对字段，只有两者同时有效才加载采集脚本。
+6. 为可选外部功能保留安全默认值。关闭或配置不完整时必须没有请求、DOM 或客户端负担；凭据只放到 CI/托管平台 Secrets。Umami 的 `websiteId` 与 `scriptUrl` 是可选成对字段，只有两者同时有效才加载采集脚本。`comment.yaml` 的 Giscus provider 需要三必填（`giscus.repo` / `repoId` / `categoryId`），缺任一等同关闭。
 
 ## 配置审阅清单
 

@@ -32,7 +32,7 @@ Shirone 的可选能力(评论、统计、音乐、追番、页脚注入等)遵�
 - `docs/performance-guidelines.md` — 性能架构指南
 - `src/config/README.md` — 配置契约、config/data 判别表、新增配置项流程
 - `docs/umami-guide.md` — Umami share URL、访问采集、客户端 API 与零负担说明
-- 参考实现:`src/config/commentConfig.ts`、`src/components/organisms/comment/CommentSection.astro`、`src/components/organisms/comment/Twikoo.astro`、`src/utils/script-loader.ts`
+- 参考实现:`src/config/commentConfig.ts`、`src/components/organisms/comment/CommentSection.astro`、`src/components/organisms/comment/Twikoo.astro`、`src/components/organisms/comment/Giscus.astro`(第二 Provider:一次性 IIFE 脚本注入与主题事件同步的例外模式)、`src/utils/script-loader.ts`
 
 ## 验证命令
 
