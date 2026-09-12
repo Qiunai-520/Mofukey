@@ -29,16 +29,9 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  *    `lang` 与 `scriptUrl`（自托管 giscus 时替换）。
  */
 export const commentConfig: CommentConfig = withUserConfig("comment", {
-	/** 全局评论总开关：false 时完全不加载评论脚本与 DOM */
-<<<<<<< HEAD
-	enable: true,
-	/** 评论提供商类型："none" | "twikoo" | "giscus" */
-	provider: "twikoo",
-=======
 	enable: true,
 	/** 评论提供商类型："none" | "twikoo" */
 	provider: "twikoo",
->>>>>>> 0706b64 (个性化站点：删除示例内容，更新配置，添加自己的文章和图片)
 	/** 是否开启视口懒加载：滚动进入视口才动态加载评论组件（推荐 true） */
 	lazy: true,
 	/** Twikoo 专有配置 */
