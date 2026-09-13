@@ -52,7 +52,7 @@
     "lighthouse:mobile": "node scripts/lighthouse/run.mjs --device=mobile",
     "lighthouse": "node scripts/lighthouse/run.mjs --device=desktop",
     "astro": "astro",
-    "type-check": "tsc --noEmit --isolatedDeclarations",
+    "type-check": "tsc --noEmit",
     "new-post": "node scripts/new-post.js",
     "format": "biome format --write ./src",
     "lint": "biome check --write ./src",

@@ -7,13 +7,12 @@ import type { DeviceItem } from "@/types/devicesConfig";
 export const devicesData: DeviceItem[] = [
 	{
 		id: "macbook-pro-16",
-		name: 'MacBook Pro 16 英寸',
+		name: "MacBook Pro 16 英寸",
 		brand: "苹果",
 		category: "桌面设备",
 		status: "active",
 		specs: "M5 Max 18 核 CPU / 40 核 GPU / 128GB / 8TB",
-		description:
-			"用于日常开发、设计、AI 任务以及高负载渲染的主力工作站。",
+		description: "用于日常开发、设计、AI 任务以及高负载渲染的主力工作站。",
 		icon: "material-symbols:laptop-mac-rounded",
 		featured: true,
 		year: "2026",
@@ -59,7 +58,7 @@ export const devicesData: DeviceItem[] = [
 	},
 	{
 		id: "ipad-pro-11-2022",
-		name: 'iPad Pro 11 英寸',
+		name: "iPad Pro 11 英寸",
 		brand: "苹果",
 		category: "平板电脑",
 		status: "backup",

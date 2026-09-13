@@ -13,7 +13,7 @@ export const projectsData: ProjectItem[] = [
 		category: "theme",
 		phase: "building",
 		technologies: ["Astro", "Svelte", "TypeScript", "Tailwind CSS"],
-		icon: "material-symbols:deployed-code-outline-rounded",
+		icon: "/assets/images/mofukey.svg",
 		cover: "/assets/images/mofukeybg.webp",
 		coverAlt: "Mofukey 网站首页预览",
 		featured: true,
