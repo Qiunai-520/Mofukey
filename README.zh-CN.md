@@ -171,7 +171,11 @@ draft: false
 
 Shirone 会生成静态的 `dist/` 目录，可部署到 Vercel、Netlify、GitHub Pages 或任意静态托管服务。
 
-部署前，请更新 `src/config/siteConfig.ts` 中的 `site` 和 `base`，然后运行：
+部署前，请更新 `src/config/siteConfig.ts` 中的 `site` 和 `base`（或在内容仓的 `config/site.yaml` 中配置）：
+- 若站点部署在域名根目录（例如 `https://example.com/` 或自定义域名），`base` 保持默认 `"/"` 即可；
+- 若站点部署在带子路径的托管平台（例如 GitHub Pages 默认项目地址 `https://username.github.io/Shirone/`），需将 `base` 设置为项目子路径（如 `"/Shirone"` 或 `"/Shirone/"`），`site` 设置为根域名 `https://username.github.io`。构建系统与站内所有资源引用均会自动适配该前缀。
+
+然后运行：
 
 ```bash
 pnpm install --frozen-lockfile

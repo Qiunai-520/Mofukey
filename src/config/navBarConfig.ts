@@ -1,6 +1,12 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
+import { aboutConfig } from "@/config/aboutConfig";
+import { albumsConfig } from "@/config/albumsConfig";
+import { animeConfig } from "@/config/animeConfig";
+import { compassConfig } from "@/config/compassConfig";
 import { devicesConfig } from "@/config/devicesConfig";
+import { friendsConfig } from "@/config/friendsConfig";
+import { momentsConfig } from "@/config/momentsConfig";
 import { projectsConfig } from "@/config/projectsConfig";
 import { skillsConfig } from "@/config/skillsConfig";
 import { timelineConfig } from "@/config/timelineConfig";
@@ -119,11 +125,11 @@ const defaultNavBarConfig: NavBarConfig = {
 	links: [
 		LinkPresets.Home,
 		LinkPresets.Archive,
-		LinkPresets.Friends,
-		LinkPresets.Moments,
-		LinkPresets.Anime,
-		LinkPresets.Compass,
-		LinkPresets.Albums,
+		...(friendsConfig.enable ? [LinkPresets.Friends] : []),
+		...(momentsConfig.enable ? [LinkPresets.Moments] : []),
+		...(animeConfig.enable ? [LinkPresets.Anime] : []),
+		...(compassConfig.enable ? [LinkPresets.Compass] : []),
+		...(albumsConfig.enable ? [LinkPresets.Albums] : []),
 		{
 			name: i18n(I18nKey.more),
 			icon: "material-symbols:apps-rounded",
@@ -136,31 +142,21 @@ const defaultNavBarConfig: NavBarConfig = {
 				// 需要时取消注释即可
 				// LinkPresets.Categories,
 				// LinkPresets.Tags,
-				LinkPresets.About,
+				...(aboutConfig.enable ? [LinkPresets.About] : []),
 				LinkPresets.GitHub,
 			],
 		},
 	],
 };
 
-/** `$t:home` 形式的 i18n 引用前缀；不带前缀的 name 一律按字面量处理。 */
-const I18N_REFERENCE_PREFIX = "$t:";
+import { resolveI18nText } from "../utils/i18n-utils.ts";
 
 function fail(message: string): never {
 	throw new Error(`[config] nav-bar：${message}`);
 }
 
 function resolveName(name: string): string {
-	if (!name.startsWith(I18N_REFERENCE_PREFIX)) return name;
-
-	const key = name.slice(I18N_REFERENCE_PREFIX.length);
-	if (!Object.hasOwn(I18nKey, key)) {
-		fail(
-			`未知的 i18n 词条 "${key}"。可用词条见 src/i18n/i18nKey.ts；` +
-				" 若本意是普通文本，去掉开头的 $t: 即可。",
-		);
-	}
-	return i18n(I18nKey[key as keyof typeof I18nKey]);
+	return resolveI18nText(name);
 }
 
 /**

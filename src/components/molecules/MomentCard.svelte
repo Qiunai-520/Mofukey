@@ -112,7 +112,7 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 	flex-direction: column
 	box-sizing: border-box
 	width: 100%
-	padding: 1rem 1.25rem
+	padding: var(--m3e-space-4) var(--m3e-space-5)
 	border-radius: var(--shape-corner-l)
 	background: var(--card-bg)
 	border: 1px solid var(--outline-variant)
@@ -121,12 +121,12 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 	&__header
 		display: flex
 		align-items: center
-		gap: 0.75rem
+		gap: var(--m3e-space-3)
 
 	&__author
 		display: inline-flex
 		align-items: center
-		gap: 0.625rem
+		gap: var(--m3e-space-2)
 		min-width: 0
 		text-decoration: none
 		border-radius: var(--shape-corner-full)
@@ -145,13 +145,13 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 	&__badges
 		display: inline-flex
 		align-items: center
-		gap: 0.375rem
+		gap: var(--m3e-space-1)
 		flex-shrink: 0
 
 	&__badge
 		display: inline-flex
 		align-items: center
-		gap: 0.25rem
+		gap: var(--m3e-space-1)
 		padding: 0.1875rem 0.5rem
 		border-radius: var(--shape-corner-full)
 		background: var(--surface-container-high)
@@ -172,7 +172,7 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 		font: var(--m3e-type-body-small)
 
 	&__content
-		margin-top: 0.75rem
+		margin-top: var(--m3e-space-3)
 		color: var(--on-surface)
 		font: var(--m3e-type-body-medium)
 		line-height: 1.75
@@ -186,9 +186,9 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 		display: flex
 		align-items: center
 		justify-content: space-between
-		gap: 0.75rem
+		gap: var(--m3e-space-3)
 		flex-wrap: wrap
-		margin-top: 0.875rem
+		margin-top: var(--m3e-space-3)
 
 	&__location
 		display: inline-flex

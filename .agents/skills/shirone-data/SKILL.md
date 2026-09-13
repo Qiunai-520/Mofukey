@@ -45,7 +45,7 @@ public/images/albums/summer/
 - `src/types/album.ts`、`src/utils/album-scanner.ts` — 相册实际 schema 与扫描规则
 - `src/data/` — 各数据页内容实体
 - `src/config/` — 各数据页行为配置
-- `src/pages/AGENTS.md` — 相册保护与 SSR 约束
+- `src/pages/_AGENTS.md` — 相册保护与 SSR 约束
 
 ## npm 包模式数据路径
 

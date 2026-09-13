@@ -159,6 +159,42 @@ export const CONFIG_DOMAINS = Object.freeze([
 		module: "@/types/umamiConfig",
 	},
 	{
+		key: "about",
+		file: "about",
+		type: "AboutConfig",
+		module: "@/types/aboutConfig",
+	},
+	{
+		key: "friends",
+		file: "friends",
+		type: "FriendsConfig",
+		module: "@/types/friendsConfig",
+	},
+	{
+		key: "moments",
+		file: "moments",
+		type: "MomentsConfig",
+		module: "@/types/momentsConfig",
+	},
+	{
+		key: "albums",
+		file: "albums",
+		type: "AlbumsConfig",
+		module: "@/types/albumsConfig",
+	},
+	{
+		key: "compass",
+		file: "compass",
+		type: "CompassConfig",
+		module: "@/types/compassConfig",
+	},
+	{
+		key: "i18n",
+		file: "i18n",
+		type: "I18nConfig",
+		module: "@/types/i18nConfig",
+	},
+	{
 		// 导航项要引用 LinkPresets 并调用 i18n()，无法用「默认值 ⊕ 覆盖」表达，
 		// 因此走整体替换的中间形态，由 resolveNavBarLinks() 在代码仓侧还原。
 		key: "navBar",

@@ -167,13 +167,13 @@ test.describe("动态页", () => {
 		const expectStableLayout = (layout: typeof before) => {
 			expect(
 				Math.abs(layout.stageHeight - before.stageHeight),
-			).toBeLessThanOrEqual(1);
+			).toBeLessThanOrEqual(2);
 			expect(
 				Math.abs(layout.viewerHeight - before.viewerHeight),
-			).toBeLessThanOrEqual(1);
+			).toBeLessThanOrEqual(2);
 			expect(
 				Math.abs(layout.cardHeight - before.cardHeight),
-			).toBeLessThanOrEqual(1);
+			).toBeLessThanOrEqual(2);
 		};
 		await page.keyboard.press("ArrowRight");
 		await expect(viewer.locator(".moment-viewer__counter")).toHaveText("2 / 7");

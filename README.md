@@ -182,7 +182,11 @@ Frequently used optional fields include `updated`, `pinned`, `comment`, `lang`, 
 
 Shirone produces a static `dist/` directory and can be deployed to Vercel, Netlify, GitHub Pages, or any static hosting service.
 
-Before deploying, update `site` and `base` in `src/config/siteConfig.ts`, then run:
+Before deploying, update `site` and `base` in `src/config/siteConfig.ts` (or in your content repository's `config/site.yaml`):
+- If deployed to a domain root (e.g., `https://example.com/` or a custom domain), keep `base` as `"/"`.
+- If deployed to a subpath directory (such as GitHub Pages repository URL `https://username.github.io/Shirone/`), set `base` to the subpath (e.g. `"/Shirone"` or `"/Shirone/"`), and set `site` to `https://username.github.io`. The build pipeline and internal assets will adapt automatically.
+
+Then run:
 
 ```bash
 pnpm install --frozen-lockfile

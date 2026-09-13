@@ -28,8 +28,8 @@ export interface AnimeItem {
 	status: AnimeStatus;
 	/** 个人评分 0-10 */
 	rating: number;
-	/** 追番进度：已看 / 总集数 */
-	progress: { watched: number; total: number };
+	/** 追番进度：已看 / 总集数（未知时可选省略） */
+	progress?: { watched: number; total: number };
 	/** 一句话感想 */
 	description?: string;
 	/** 放送年份（展示用） */
