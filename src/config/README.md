@@ -20,6 +20,10 @@
    i18n——该类反向依赖模块只允许从具体文件导入（如 `@/config/siteConfig`），
    **禁止走 barrel**，否则形成 `index → navBar → translation → index` 环。
 4. `astro.config.mjs` 在 Astro 配置层运行，用相对路径 `./src/config/<file>.ts` 导入。
+5. **`integrationsConfig.ts` 是上述规则的例外**：它同时被 `astro.config.mjs` 和
+   `src/integration/index.ts` 按相对路径导入，且**禁止走 barrel**。原因见该文件头部
+   注释——barrel 不会拷进用户项目，而包模式必须在构建期把它静态打进 bundle。
+   它的 `import type` 全部在编译期擦除，不产生运行时依赖。
 
 ## 配置（Behavior）与数据（Content）分层原则
 
@@ -115,6 +119,8 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 | `commentConfig.ts` | 评论系统：全局开关（默认关闭）、Provider 选择（Twikoo / Giscus）、视口懒加载与服务凭据配置；Giscus 基于 GitHub Discussions（需公开仓库 + 安装 giscus App + 从 giscus.app 取 repoId/categoryId），主题明暗双值跟随站点切换 |
 | `contextMenuConfig.ts` | 桌面端右键增强：可选开关（当前默认开启）；配置允许页面与操作顺序，关闭时零 DOM、零监听器、零客户端资源 |
 | `umamiConfig.ts` | Umami 统计：全局开关（默认关闭）、公开分享统计读取，以及可选的官方访问采集脚本配置；支持内容仓 `config/umami.yaml` 覆盖（领域键 `umami`） |
+| `integrationsConfig.ts` | 两个 Astro 配置入口（本仓 `astro.config.mjs` 与 npm 包模式的 `src/integration/index.ts`）共享的集成选项：swup / astro-icon / expressive-code / svelte / mdx 的选项、`vite.build` 共用部分、`trailingSlash` 与 `image.endpoint.route` 的配对、音乐侧栏虚拟模块 id。**本目录里唯一的例外**：不走 barrel、不经 `withUserConfig`、也不被 `loadConfigModule` 动态加载（包模式在构建期把它打进 `dist/index.js`），所以它没有用户覆盖层，用户项目里的那份拷贝是死的 |
+| `sitemapFilter.ts` | 由 `*Config.enable === false` 推导被关闭的页面清单，供 `sitemap()` 的 `filter` 排除它们。包模式通过 `loadConfigModule` 加载，用户可自行覆盖 |
 | `skillsConfig.ts` | 技能页行为控制：页面总开关、分类清单与单项禁用列表（技能内容维护在 `src/data/skills.ts`）；关闭页面时导航入口同步隐藏 |
 | `projectsConfig.ts` | 项目页行为控制：页面总开关、分类清单与单项禁用列表（项目内容维护在 `src/data/projects.ts`）；关闭页面时导航入口同步隐藏 |
 | `timelineConfig.ts` | 时间线页行为控制：页面总开关、分类清单、排序方向与单项禁用列表（时间线内容维护在 `src/data/timeline.ts`）；关闭页面时导航入口同步隐藏 |

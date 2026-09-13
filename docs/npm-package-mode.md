@@ -104,6 +104,17 @@ cached against a hash of the collected charset, so repeat builds skip the work.
 - Anything imported by a page must be in `dependencies`, never
   `devDependencies` — the package build fails the release if it finds an
   undeclared bare import. `@iconify-json/simple-icons` was exactly this trap.
+- The two Astro config entry points (`astro.config.mjs` and
+  `src/integration/index.ts`) still each declare a config object, and neither
+  reads the other. The *options* they install now come from one place —
+  `src/config/integrationsConfig.ts` — so adding an integration option there
+  covers both modes at once. What is **not** shared is the wiring, and it is
+  deliberately not shared: the vite aliases, `svelte().preprocess`,
+  `optimizeDeps` filtering, `vite.plugins`, and the way expressive-code's
+  `themes` and `plugins` are resolved all differ because the two modes have
+  different roots, dependency trees and config-resolution paths. Each is
+  commented at its use site. If you add config on one side only, the shirones
+  pipeline's config-parity check fails the release.
 
 ## Package-mode pitfalls that cost us a day
 
