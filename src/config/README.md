@@ -79,6 +79,11 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 并调用 `i18n()`，深合并只会得到一堆未解析的引用，因此它由 `resolveNavBarLinks()`
 把内容仓的声明式条目还原成 `NavBarLink`。
 
+`config/nav-bar.yaml` 是**整体替换**，不会跟着各功能的 `enable` 走，因此
+`navBarConfig` 在任何来源的条目汇合后都会过一遍 `pruneUnavailableNavLinks()`
+（`src/utils/nav-utils.ts`）：指向已关闭功能页面的入口被裁掉，空掉的下拉分组一并隐藏。
+判定按站内路由（去尾斜杠、忽略查询串与哈希），站外链接与锚点不受影响。
+
 ### 反向导出覆盖层（`content:export --config`）
 
 覆盖层是双向的：`pnpm content:export --config` 会求「当前生效配置」与「主题默认值」的差，
